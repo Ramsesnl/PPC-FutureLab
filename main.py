@@ -13,16 +13,16 @@ def calculate_distance(x1, y1, x2, y2):
 # print(calculate_distance(0, 0, 6, 8, ))  # result is 10, the famous 6, 8, 10, triangle
 # print(calculate_distance(1, 10, 6, 22, ))  # result is 13, the famous 5, 12, 13, triangle
 
-divide_by = int(input("delen door? : "))
-result = 0
-try:
-    result = 15 / divide_by
-except Exception as e:
-    print("Something is wrong with your calculation. Reverting to the default result: \n")
-    print("Default is: " + str(15 / 2))
-    print (e)
-finally:
-    print(result)
+# divide_by = int(input("delen door? : "))
+# result = 0
+# try:
+#     result = 15 / divide_by
+# except Exception as e:
+#     print("Something is wrong with your calculation. Reverting to the default result: \n")
+#     print("Default is: " + str(15 / 2))
+#     print (e)
+# finally:
+#     print(result)
 
 
 
@@ -92,4 +92,13 @@ finally:
 #         continue
 #     print(x)
 
+fruit = ["pear", "banana", "cherry", "orange"]
+print(fruit)
 
+fruit.append("seafruit")
+fruit.insert(3, "guava")# ook hier geld 0 is 1
+fruit.remove
+
+
+
+print(fruit)

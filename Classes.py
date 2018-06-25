@@ -10,9 +10,9 @@ class Car:
 
     def __init__(self):
         """When this class is instantiated, generate some interesting actual random values"""
-        self.color = random.choice(["green", "yellow", "white", "blue"])
+        self.color = random.choice(["green", "yellow", "white", "blue", "cyan", "magenta", "gray", "black", "lblue", "lgreen", "dgreen", "brown",])
         self.heading = random.randint(0, 360)
-        self.max_speed = random.randint(0, 400)
+        self.max_speed = random.randint(30, 120)
         self.velocity = random.randint(0, self.max_speed)
         self.traveltime = random.randint(0, 1000)
 
@@ -26,36 +26,55 @@ class Car:
             self.heading) + "deg " + str(self.traveled_distance()) + "km")
 
 
-car1 = Car()
-car2 = Car()
-
-car1.print_properties()
-car2.print_properties()
 
 
-car1 = Car()
-car1.color = "blue"
-car1.velocity = 50
-car1.heading = 10
+# #car1 = Car()
+# #car2 = Car()
+#
+# car1 = Car()
+# car1.color = "blue"
+# car1.velocity = 50
+# car1.heading = 10
+#
+# car2 = Car()
+# car2.color = "green"
+# car2.velocity = 45.5
+# car2.heading = 18
+#
+# car3 = Car()
+# car3.color = "yello"
+# car3.velocity = 52
+# car3.heading = 16
+#
+# car4 = Car()
+# car4.color = "orange"
+# car4.velocity = 54
+# car4.heading = 15
+#
+# car5 = Car()
+# car5.color = "red"
+# car5.velocity = 48
+# car5.heading = 11
+#
+# print(car1.color)
+#
+# cars = []
+# cars.append(car1) # add a car to thel ist cars
+# cars.append(car2) # add another car to thel ist cars
+# cars.append(car3) # Duh.......
+# cars.append(car4)
+# cars.append(car5)
+#
+# print(cars.__len__()) #ammount of cars in the list
+#
+# car1.print_properties()
+# car2.print_properties()
 
-car2 = Car()
-car2.color = "green"
-car2.velocity = 45.5
-car2.heading = 18
+# smart way to add a lot of cars
+cars = []  # create emty list
+while cars.__len__() < 100:
+    new_car = Car()
+    new_car.print_properties()
+    cars.append(new_car)
 
-car3 = Car()
-car3.color = "yello"
-car3.velocity = 52
-car3.heading = 16
-
-car4 = Car()
-car4.color = "orange"
-car4.velocity = 54
-car4.heading = 15
-
-car5 = Car()
-car5.color = "red"
-car5.velocity = 48
-car5.heading = 11
-
-print(car1.color)
+print(cars.__len__())  # amount of cars in the list
