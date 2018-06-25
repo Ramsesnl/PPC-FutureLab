@@ -15,20 +15,21 @@ class Car:
     pos_x = 100  # initial position
     pos_y = 100
     heading = 0  # car direction in rad
-    speed = 10  # car speed in pixels / step
+    # speed = 10  # car speed in pixels / step
     size = 10  # car size in pixels
+    afstand = 0
 
     def __init__(self):
         """When this class is instantiated, generate some interesting actual random values"""
-        self.color = random.choice(["green", "yellow", "white", "blue"])
+
+        self.color = random.choice(["blue", "green", "red", "yellow", "grey", "white", "purple", "pink"])
         self.heading = random.randint(0, 360)
-        self.max_speed = random.randint(0, 400)
+        # self.max_speed = random.randint(30, 55)
+        self.speed = random.randint(5, 10)
         self.velocity = random.randint(0, self.max_speed)
         self.traveltime = random.randint(0, 1000)
 
-        """
-        generate a valid heading and corresponding start position eac time a new car is generated
-        """
+        """generate a valid heading and corresponding start position eac time a new car is generated"""
         self.heading = random.choice([0, math.pi / 2, math.pi, math.pi * 1.5])
         if (self.heading == 0):  # car heading right
             self.pos_x = 0
@@ -43,29 +44,28 @@ class Car:
             self.pos_x = width / 2 + roadWidth / 3
             self.pos_y = height
 
-        self.color = random.choice(["blue", "green", "red", "yellow", "grey", "white", "purple", "pink"])
-
-    def traveled_distance(self):
-            """calculates the distance this car traveled given the time and velocity"""
-            result = self.velocity * (self.traveltime / 3600)  # in km
-            return result
-
-    def print_properties(self):
-            print(self.color + " " + str(self.velocity) + "km/h " + str(
-                self.heading) + "deg " + str(self.traveled_distance()) + "km")
-
     def turn(self):
-        directionTurn = random.choice(["left", "right", "none"])
-        if directionTurn == "left":
-            # do something
-            self.heading = self.heading + math.pi / 2
+        directionturn = random.choice(["left", "right"])
+        # if directionTurn == "left":
+        #     # do something
+        if (directionturn is "left"):
+            if (self.afstand >= ((width / 2) + 50) and self.heading == 0):
+                self.heading = self.heading - math.pi / 2
+        elif (directionturn is "right"):
+            if (not self.afstand != ((width / 2) - 50) and self.heading == 0):
+                self.heading = self.heading + math.pi / 2
+
 
     def move(self):
         """
         calculate new car position given speed and heading
         """
-        self.pos_x = self.pos_x + math.cos(self.heading) * self.speed
-        self.pos_y = self.pos_y + math.sin(self.heading) * self.speed
+        dx = math.cos(self.heading) * self.speed
+        dy = math.sin(self.heading) * self.speed
+        self.pos_x = self.pos_x + dx
+        self.pos_y = self.pos_y + dy
+
+        self.afstand += dx + dy
 
     def draw(self):
         # draw the car. Depending on direction, turn the car
@@ -84,10 +84,10 @@ def draw_scene():
     canvas.delete("all")
 
     # draw the green parks
-    canvas.create_rectangle(0, 0, (width - roadWidth) / 2, (height - roadWidth) / 2, fill="green")
-    canvas.create_rectangle(0, (height + roadWidth) / 2, (width - roadWidth) / 2, height, fill="green")
-    canvas.create_rectangle((width + roadWidth) / 2, 0, width, (height - roadWidth) / 2, fill="green")
-    canvas.create_rectangle((width + roadWidth) / 2, (height + roadWidth) / 2, width, height, fill="green")
+    canvas.create_rectangle(0, 0, (width - roadWidth) / 2, (height - roadWidth) / 2, fill="darkgreen")
+    canvas.create_rectangle(0, (height + roadWidth) / 2, (width - roadWidth) / 2, height, fill="darkgreen")
+    canvas.create_rectangle((width + roadWidth) / 2, 0, width, (height - roadWidth) / 2, fill="darkgreen")
+    canvas.create_rectangle((width + roadWidth) / 2, (height + roadWidth) / 2, width, height, fill="darkgreen")
 
     # draw the dashed lines on the road
     canvas.create_line(0, height / 2, width, height / 2, fill="white", dash=(20, 20))
@@ -102,15 +102,16 @@ def simulate_cars():
 
         # add a new car every now and then
         if random.randint(0, 9) > 8:
-            newCar = Car();
+            newCar = Car()
             cars.append(newCar)
 
         # draw all cars in the scene
         for car in cars:
             car.move()
             car.draw()
+            car.turn()
 
-            # remove cars that drove out of the scene
+             # remove cars that drove out of the scene
             if (car.pos_x < 0 or car.pos_x > width or car.pos_y < 0 or car.pos_y > height):
                 cars.remove(car)
 
@@ -124,10 +125,10 @@ if __name__ == '__main__':
     # main global variables
     width = root.winfo_screenwidth()
     height = root.winfo_screenheight()
-    roadWidth = 200
+    roadWidth = 300
 
     #  canvas is a white piece of paper on which you can draw
-    canvas = Canvas(root, width=width, height=height, bg="black")
+    canvas = Canvas(root, width=width, height=height, bg="dimgrey")
     canvas.pack()
 
     # list of cars in the scene

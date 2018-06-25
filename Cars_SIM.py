@@ -47,13 +47,13 @@ class Car:
         self.color = random.choice(["blue", "green", "red", "yellow", "grey", "white", "purple", "pink"])
 
     def traveled_distance(self):
-            """calculates the distance this car traveled given the time and velocity"""
-            result = self.velocity * (self.traveltime / 3600)  # in km
-            return result
+        """calculates the distance this car traveled given the time and velocity"""
+        result = self.velocity * (self.traveltime / 3600)  # in km
+        return result
 
     def print_properties(self):
-            print(self.color + " " + str(self.velocity) + "km/h " + str(
-                self.heading) + "deg " + str(self.traveled_distance()) + "km")
+        print(self.color + " " + str(self.velocity) + "km/h " + str(
+            self.heading) + "deg " + str(self.traveled_distance()) + "km")
 
     def turn_left(self):
 
@@ -65,7 +65,6 @@ class Car:
         if (self.afstand >= (width - roadWidth) / 2 and self.heading == 0):
             self.heading = self.heading + math.pi / 2
 
-
     def move(self):
         """
         calculate new car position given speed and heading
@@ -76,7 +75,6 @@ class Car:
         self.pos_y = self.pos_y + dy
 
         self.afstand += dx + dy
-
 
     def draw(self):
         # draw the car. Depending on direction, turn the car
@@ -122,11 +120,10 @@ def simulate_cars():
             directionTurn = random.choice(["left", "right", "none"])
             if (directionTurn == "right"):
                 car.turn_right()
-            elif  (directionTurn == "left"):
+            elif (directionTurn == "left"):
                 car.turn_left()
             elif (directionTurn == "none"):
                 print("")
-
 
             car.draw()
 
@@ -158,4 +155,3 @@ if __name__ == '__main__':
 
     # must be the last line before exit for TKinter
     root.mainloop()
-
