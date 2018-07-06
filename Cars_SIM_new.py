@@ -45,7 +45,7 @@ class Car:
             self.pos_y = height
 
     def turn(self):
-        directionturn = random.choice(["left", "right"])
+        directionturn = random.choice(["left", "right", "none"])
         # if directionTurn == "left":
         #     # do something
         if (directionturn is "left"):
@@ -54,6 +54,8 @@ class Car:
         elif (directionturn is "right"):
             if (not self.afstand != ((width / 2) - 50) and self.heading == 0):
                 self.heading = self.heading + math.pi / 2
+        elif (directionturn is "none"):
+            self.heading
 
 
     def move(self):
